@@ -1,0 +1,33 @@
+# General
+# ------------------------------------------------------------------------------
+# DJANGO_READ_DOT_ENV_FILE=True
+DJANGO_SETTINGS_MODULE=config.settings.production
+DJANGO_SECRET_KEY=FJPjUhXFxHigcs2rBHnsqDOv5He4v8POhhhWyaxUfRZ5e078fcnv7XOMmJv3KzOHh
+DJANGO_ADMIN_URL=EsDeMJTHt33pHbSnU8BHpyBVR0JTuNxt/
+DJANGO_ALLOWED_HOSTS=.loongair.uz
+
+# Security
+# ------------------------------------------------------------------------------
+# TIP: better off using DNS, however, redirect is OK too
+DJANGO_SECURE_SSL_REDIRECT=False
+
+
+
+
+
+
+# Gunicorn
+# ------------------------------------------------------------------------------
+WEB_CONCURRENCY=4
+
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/3
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+#CELERY_FLOWER_USER=debug
+#CELERY_FLOWER_PASSWORD=debug
+
