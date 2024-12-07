@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    # path("users/", include("app.users.urls", namespace="users")),
+    # path("users/", include("apps.users.urls", namespace="users")),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
 
@@ -20,7 +20,7 @@ if settings.DEBUG:
 
 # API URLS
 urlpatterns += [
-    path('api/v1', include('app.users.urls')),
+    path('api/v1', include('apps.users.urls')),
     path("schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("docs/",SpectacularSwaggerView.as_view(url_name="api-schema")),
     path('api/v1/token/', TokenObtainPairView.as_view()),

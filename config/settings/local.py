@@ -26,7 +26,7 @@ DATABASES = {
 # DATABASES = {
 #     "default": env.db(
 #         "DATABASE_URL",
-#         default="postgres:///app",
+#         default="postgres:///apps",
 #     ),
 # }
 

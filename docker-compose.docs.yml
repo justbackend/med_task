@@ -9,8 +9,8 @@ services:
       - ./.envs/.local/.django
     volumes:
       - ./docs:/docs:z
-      - ./config:/app/config:z
-      - ./app:/app/app:z
+      - ./config:/apps/config:z
+      - ./apps:/apps/apps:z
     ports:
       - '9000:9000'
     command: /start-docs

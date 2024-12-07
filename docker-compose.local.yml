@@ -14,7 +14,7 @@ services:
       - postgres
       - redis
     volumes:
-      - .:/app:z
+      - .:/apps:z
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
