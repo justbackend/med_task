@@ -1,4 +1,6 @@
 # ruff: noqa: E501
+from datetime import timedelta
+
 from .base import *  # noqa: F403
 from .base import DATABASES
 from .base import INSTALLED_APPS
@@ -137,3 +139,8 @@ SPECTACULAR_SETTINGS["SERVERS"] = [
 ]
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv('ACCESS_TOKEN_LIFETIME'))),
+    "REFRESH_TOKEN_LIFETIME": timedelta(hours=int(os.getenv('REFRESH_TOKEN_LIFETIME'))),
+}

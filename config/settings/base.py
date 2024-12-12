@@ -1,6 +1,6 @@
 # ruff: noqa: ERA001, E501
 """Base settings to build other settings files upon."""
-
+import os
 from pathlib import Path
 
 import environ
@@ -27,17 +27,18 @@ LANGUAGE_CODE = "en-us"
 USE_I18N = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
-# LOCALE_PATHS = [str(BASE_DIR / "locale")]
 
 DATABASES = {
-    "default": env.db(
-        "DATABASE_URL",
-        default="postgres:///apps",
-    ),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME'),
+        'USER': os.getenv('DATABASE_USER'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
-# DATABASES["default"]["ATOMIC_REQUESTS"] = True
-# https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # URLS
