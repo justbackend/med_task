@@ -6,7 +6,8 @@ from django.urls import include
 from django.urls import path
 from drf_spectacular.views import SpectacularAPIView
 from drf_spectacular.views import SpectacularSwaggerView
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
@@ -20,17 +21,21 @@ if settings.DEBUG:
 
 # API URLS
 urlpatterns += [
-    path('api/v1/', include('apps.users.urls')),
+    path("api/v1/", include("apps.users.urls")),
     path("schema/", SpectacularAPIView.as_view(), name="api-schema"),
-    path("docs/",SpectacularSwaggerView.as_view(url_name="api-schema")),
-    path('api/v1/token/', TokenObtainPairView.as_view()),
-    path('api/v1/refresh_token/', TokenRefreshView.as_view()),
+    path("docs/", SpectacularSwaggerView.as_view(url_name="api-schema")),
+    path("api/v1/token/", TokenObtainPairView.as_view()),
+    path("api/v1/refresh_token/", TokenRefreshView.as_view()),
 ]
 
 if settings.DEBUG:
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
-        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
 
-    if 'silk' in settings.INSTALLED_APPS:
-        urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]
+        urlpatterns = [*urlpatterns, path("__debug__/", include(debug_toolbar.urls))]
+
+    if "silk" in settings.INSTALLED_APPS:
+        urlpatterns = [
+            *urlpatterns,
+            path("silk/", include("silk.urls", namespace="silk")),
+        ]

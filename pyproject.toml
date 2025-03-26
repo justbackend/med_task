@@ -1,3 +1,41 @@
+# ==== isort ====
+[tool.isort]
+profile = "black"
+line_length = 119
+known_first_party = "MiraMiller"
+known_django = "django"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "DJANGO", "FIRSTPARTY", "LOCALFOLDER"]
+multi_line_output = 3
+include_trailing_comma = true
+use_parentheses = true
+ensure_newline_before_comments = true
+combine_as_imports = true
+lines_after_imports = 2
+skip = ["migrations", "__pycache__", ".git", ".tox", ".venv", "env"]
+src_paths = ["apps", "src"]
+order_by_type = true
+
+# ==== black ====
+[tool.black]
+line-length = 119
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.tox
+  | __pycache__
+  | build
+  | dist
+  | migrations
+  | env
+  | venv
+  | .venv
+)/
+'''
+skip-string-normalization = false
+
 # ==== pytest ====
 [tool.pytest.ini_options]
 minversion = "6.0"
@@ -34,32 +72,8 @@ ignore_errors = true
 [tool.django-stubs]
 django_settings_module = "config.settings.test"
 
-# ==== djLint ====
-[tool.djlint]
-blank_line_after_tag = "load,extends"
-close_void_tags = true
-format_css = true
-format_js = true
-# TODO: remove T002 when fixed https://github.com/djlint/djLint/issues/687
-ignore = "H006,H030,H031,T002"
-include = "H017,H035"
-indent = 2
-max_line_length = 119
-profile = "django"
-
-[tool.djlint.css]
-indent_size = 2
-
-[tool.djlint.js]
-indent_size = 2
-
 [tool.ruff]
-target-version = "py312"
-# Exclude a variety of commonly ignored directories.
-extend-exclude = [
-    "*/migrations/*.py",
-    "staticfiles/*",
-]
+line-length = 119
 
 [tool.ruff.lint]
 select = [
@@ -123,6 +137,11 @@ ignore = [
   "RUF012", # Mutable class attributes should be annotated with `typing.ClassVar`
   "SIM102", # sometimes it's better to nest
   "UP038", # Checks for uses of isinstance/issubclass that take a tuple
+  "SLF001", # Ignores Private member accessed: `_meta`
+  "ERA001", # Ignores commented code
+  "DJ008",
+  "EM101",
+  "TRY003",# Ignores  abcense of __str__ method on models
           # of types for comparison.
           # Deactivated because it can make the code slow:
           # https://github.com/astral-sh/ruff/issues/7871
@@ -132,6 +151,7 @@ ignore = [
 extend-unsafe-fixes = [
     "UP038",
 ]
+
 
 [tool.ruff.lint.isort]
 force-single-line = true

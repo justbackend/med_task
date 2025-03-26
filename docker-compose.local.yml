@@ -1,42 +1,39 @@
 volumes:
-  your_app_name_local_postgres_data: {}
-  your_app_name_local_postgres_data_backups: {}
-  your_app_name_local_redis_data: {}
+  your_local_postgres: {}
+  your_local_postgres_backups: {}
+
 
 services:
   django: &django
     build:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
-    image: your_app_name_local_django
-    container_name: your_app_name_local_django
+    image: your_local
+    container_name: your_local
     depends_on:
       - postgres
-      - redis
     volumes:
-      - .:/apps:z
+      - .:/app:z
+
     env_file:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
+
     ports:
-      - '9000:9000'
+      - '8081:8000'
     command: /start
 
   postgres:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: your_app_name_production_postgres
-    container_name: your_app_name_local_postgres
+    image: your_local_postgres
+    container_name: your_local_postgres
     volumes:
-      - your_app_name_local_postgres_data:/var/lib/postgresql/data
-      - your_app_name_local_postgres_data_backups:/backups
+      - your_local_postgres:/var/lib/postgresql/data
+      - your_local_postgres_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
 
-  redis:
-    image: docker.io/redis:6
-    container_name: your_app_name_local_redis
-
-    volumes:
-      - your_app_name_local_redis_data:/data
+#    ports:
+#      - '5433:5432'

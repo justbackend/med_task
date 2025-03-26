@@ -2,7 +2,7 @@ from django.utils.deprecation import MiddlewareMixin
 
 
 class DummySession(dict):
-    def save(self, must_create=False):
+    def save(self, *, must_create=False):
         pass
 
     def create(self):
@@ -11,7 +11,5 @@ class DummySession(dict):
 
 class DisableSessionForAPIMiddleware(MiddlewareMixin):
     def process_request(self, request):
-        if request.path.startswith('/api/'):
+        if request.path.startswith("/api/"):
             request.session = DummySession()
-
-        return None

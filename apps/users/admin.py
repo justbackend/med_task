@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin
 from django.utils.translation import gettext_lazy as _
+
 from .models import User
 
 
@@ -13,8 +14,8 @@ class UserAdmin(auth_admin.UserAdmin):
             _("Permissions"),
             {
                 "fields": (
-                    'first_name',
-                    'last_name',
+                    "first_name",
+                    "last_name",
                     "is_active",
                     "is_staff",
                     "is_superuser",

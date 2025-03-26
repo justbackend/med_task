@@ -1,0 +1,59 @@
+#name: CI
+#
+#env:
+#  DOCKER_BUILDKIT: 1
+#  COMPOSE_DOCKER_CLI_BUILD: 1
+#
+#on:
+#  pull_request:
+#    branches: ['master', 'main']
+#    paths-ignore: ['docs/**']
+#
+#  push:
+#    branches: ['master', 'main']
+#    paths-ignore: ['docs/**']
+#
+#concurrency:
+#  group: ${{ github.head_ref || github.run_id }}
+#  cancel-in-progress: true
+
+#jobs:
+#  linter:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout Code Repository
+#        uses: actions/checkout@v4
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v5
+#        with:
+#          python-version-file: '.python-version'
+#
+#      - name: Run pre-commit
+#        uses: pre-commit/action@v3.0.1
+#
+#      - name: Deploy to Server via SSH
+#        uses: appleboy/ssh-action@v1.0.0
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USERNAME }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          script: |
+#            cd /home/miller
+#            git pull
+#            docker compose -f docker-compose.production.yml up --build -d --remove-orphans
+
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Deploy to Server via SSH
+#        uses: appleboy/ssh-action@v1.0.0
+#        with:
+#          host: ${{ secrets.HOST }}
+#          username: ${{ secrets.USERNAME }}
+#          key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          script: |
+#            cd /home/miller
+#            git pull
+#            docker compose -f docker-compose.production.yml up --build -d --remove-orphans
