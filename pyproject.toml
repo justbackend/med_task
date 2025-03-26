@@ -47,7 +47,7 @@ python_files = [
 
 # ==== Coverage ====
 [tool.coverage.run]
-include = ["tourism_management/**"]
+include = ["django_template_cookie_cutter/**"]
 omit = ["*/migrations/*", "*/tests/*"]
 plugins = ["django_coverage_plugin"]
 
