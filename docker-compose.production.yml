@@ -22,7 +22,7 @@ services:
       - ./.envs/.production/.postgres
 
     ports:
-      - "127.0.0.1:8081:5000"
+      - "127.0.0.1:8080:8080"
 
     command: /start
 

@@ -17,6 +17,11 @@ build:
 # up: Start up containers.
 up:
     @echo "Starting up containers..."
+    @docker compose up --remove-orphans
+
+# up: Start up containers in background.
+up-d:
+    @echo "Starting up containers..."
     @docker compose up -d --remove-orphans
 
 # down: Stop containers.
@@ -36,3 +41,7 @@ logs *args:
 # manage: Executes `manage.py` command.
 manage +args:
     @docker compose run --rm django python ./manage.py {{args}}
+
+
+create-superuser:
+    docker exec -it your_local python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.filter(username='a').exists() or User.objects.create_superuser('a', 'admin@example.com', 'a')"
