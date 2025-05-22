@@ -141,6 +141,10 @@ ignore = [
   "ERA001", # Ignores commented code
   "DJ008",
   "EM101",
+  "B904",
+  "BLE001",
+  "RUF001",
+  "EM102",
   "TRY003",# Ignores  abcense of __str__ method on models
           # of types for comparison.
           # Deactivated because it can make the code slow:
