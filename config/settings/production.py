@@ -71,7 +71,7 @@ LOGGING = {
         },
         "telegram": {
             "level": "ERROR",
-            "class": "utils.telegram_handler.TelegramErrorHandler",
+            "class": "apps.utils.telegram_handler.TelegramErrorHandler",
             "formatter": "verbose",
         },
     },
