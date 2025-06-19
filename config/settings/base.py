@@ -116,7 +116,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    "utils.middlewares.DisableSessionForAPIMiddleware",
+    "apps.utils.middlewares.DisableSessionForAPIMiddleware",
 ]
 
 STATIC_ROOT = str(BASE_DIR / "staticfiles")
