@@ -18,8 +18,7 @@ services:
       - postgres
       - redis
     env_file:
-      - ./.envs/.production/.django
-      - ./.envs/.production/.postgres
+      - .env
 
     ports:
       - "127.0.0.1:8080:8080"
@@ -35,7 +34,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
     env_file:
-      - ./.envs/.production/.postgres
+      - .env
 
   redis:
     image: docker.io/redis:6

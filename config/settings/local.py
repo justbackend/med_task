@@ -35,7 +35,7 @@ INSTALLED_APPS = ["whitenoise.runserver_nostatic", *INSTALLED_APPS]
 
 INSTALLED_APPS += ["silk"]
 
-MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
+MIDDLEWARE += ["silk.middleware.SilkyMiddleware"] # noqa: F405
 
 
 # ----------------------------------------------------------------------------------
@@ -44,7 +44,6 @@ MIDDLEWARE += ["silk.middleware.SilkyMiddleware"]
 # django-extensions
 # ------------------------------------------------------------------------------
 # https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
-INSTALLED_APPS += ["django_extensions"]
 
 # Your stuff...
 # ------------------------------------------------------------------------------
@@ -94,3 +93,4 @@ LOGGING = {
         },
     },
 }
+

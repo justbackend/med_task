@@ -16,8 +16,7 @@ services:
       - .:/app:z
 
     env_file:
-      - ./.envs/.local/.django
-      - ./.envs/.local/.postgres
+      - .env
 
     ports:
       - '8080:8080'
@@ -33,7 +32,7 @@ services:
       - your_local_postgres:/var/lib/postgresql/data
       - your_local_postgres_backups:/backups
     env_file:
-      - ./.envs/.local/.postgres
+      - .env
 
 #    ports:
 #      - '5433:5432'
