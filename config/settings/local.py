@@ -6,17 +6,13 @@ from .base import INSTALLED_APPS
 from .base import MIDDLEWARE
 from .base import env
 
-# GENERAL
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+
 DEBUG = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     default="zjW3iURogJGK5jDVLc7EQJxtvwDKulFpvqezW2YPiSGotKosJmqyjwwowJv3hYMi",
 )
 
-# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["*"]
 
 CACHES = {
@@ -26,27 +22,14 @@ CACHES = {
     },
 }
 
-# WhiteNoise
-# ------------------------------------------------------------------------------
+
 INSTALLED_APPS = ["whitenoise.runserver_nostatic", *INSTALLED_APPS]
 
-# django-silk
-# ---------------------------------------------------------------------------------
 
 INSTALLED_APPS += ["silk"]
 
 MIDDLEWARE += ["silk.middleware.SilkyMiddleware"] # noqa: F405
 
-
-# ----------------------------------------------------------------------------------
-
-
-# django-extensions
-# ------------------------------------------------------------------------------
-# https://django-extensions.readthedocs.io/en/latest/installation_instructions.html#configuration
-
-# Your stuff...
-# ------------------------------------------------------------------------------
 # REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"] = ("rest_framework.permissions.AllowAny",)
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=24),

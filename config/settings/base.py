@@ -31,26 +31,19 @@ DATABASES = {
 
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-# SITE_ID = 1
-# # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
+
 USE_I18N = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
 USE_TZ = True
 
 LOCALE_PATHS = [str(BASE_DIR / "locale")]
-# LOCALE_PATHS = [BASE_DIR / "locale"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# URLS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
 ROOT_URLCONF = "config.urls"
-# https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
+
 WSGI_APPLICATION = "config.wsgi.application"
 
-# APPS
-# ------------------------------------------------------------------------------
+
 DJANGO_APPS = [
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -73,20 +66,16 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "apps.users",
-    # Your stuff: custom apps go here
 ]
-# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
-# MIGRATIONS
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
+
 MIGRATION_MODULES = {"sites": "apps.contrib.sites.migrations"}
 
 AUTH_USER_MODEL = "users.User"
 
-# PASSWORDS
-# ------------------------------------------------------------------------------
+
 PASSWORD_HASHERS = [
     "django.contrib.auth.hashers.Argon2PasswordHasher",
     "django.contrib.auth.hashers.PBKDF2PasswordHasher",
@@ -104,9 +93,7 @@ PASSWORD_HASHERS = [
 #     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 # ]
 
-# MIDDLEWARE
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#middleware
+
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -127,14 +114,12 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
-# MEDIA
-# ------------------------------------------------------------------------------
+
 MEDIA_ROOT = str(APPS_DIR / "media")
 MEDIA_URL = "/media/"
 
 
-# TEMPLATES
-# ------------------------------------------------------------------------------
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -179,24 +164,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'handlers': ['console'],
-#             'level': 'DEBUG',
-#         },
-#     },
-# }
-
 REDIS_URL = env("REDIS_URL", default="redis://localhost:6379/3")
-
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
@@ -216,9 +184,6 @@ SPECTACULAR_SETTINGS = {
     "DISABLE_ERRORS_AND_WARNINGS": True,
     "SCHEMA_PATH_PREFIX": r"/api/v[0-9]/[a-zA-Z0-9_]+/",
 }
-
-# ------------------------------------------------------------------------------
-
 
 CORS_ALLOW_ALL_ORIGINS = True
 

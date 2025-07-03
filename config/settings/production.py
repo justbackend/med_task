@@ -8,17 +8,14 @@ from .base import INSTALLED_APPS
 from .base import REDIS_URL
 from .base import env
 
-# GENERAL
-# ------------------------------------------------------------------------------
+
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-# DATABASES
-# ------------------------------------------------------------------------------
+
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=2)
 
-# CACHES
-# ------------------------------------------------------------------------------
+
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -76,9 +73,6 @@ LOGGING = {
     },
 }
 
-
-# Your stuff...
-# ------------------------------------------------------------------------------
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=int(os.getenv("ACCESS_TOKEN_LIFETIME"))),
