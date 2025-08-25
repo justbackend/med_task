@@ -18,18 +18,26 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "Asia/Tashkent"
 LANGUAGE_CODE = "uz"
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": env.str("POSTGRES_DB"),
+#         "USER": env.str("POSTGRES_USER"),
+#         "PASSWORD": env.str("POSTGRES_PASSWORD"),
+#         "HOST": env.str("POSTGRES_HOST"),
+#         "PORT": env.str("POSTGRES_PORT"),
+#     },
+# }
+
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": env.str("POSTGRES_DB"),
-        "USER": env.str("POSTGRES_USER"),
-        "PASSWORD": env.str("POSTGRES_PASSWORD"),
-        "HOST": env.str("POSTGRES_HOST"),
-        "PORT": env.str("POSTGRES_PORT"),
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     },
 }
-
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 
 USE_I18N = True
@@ -60,12 +68,14 @@ THIRD_PARTY_APPS = [
     "corsheaders",
     "drf_spectacular",
     "rest_framework_simplejwt",
-    'django_cleanup.apps.CleanupConfig',
+    "django_cleanup.apps.CleanupConfig",
     "django_filters",
 ]
 
 LOCAL_APPS = [
     "apps.users",
+    "apps.service",
+    "apps.order",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -117,7 +127,6 @@ STATICFILES_FINDERS = [
 
 MEDIA_ROOT = str(APPS_DIR / "media")
 MEDIA_URL = "/media/"
-
 
 
 TEMPLATES = [
@@ -182,7 +191,8 @@ SPECTACULAR_SETTINGS = {
     "COMPONENT_SPLIT_PATH": True,
     # "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "DISABLE_ERRORS_AND_WARNINGS": True,
-    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]/[a-zA-Z0-9_]+/",
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]/",
+    # "SCHEMA_PATH_PREFIX": r"/api/v[0-9]/[a-zA-Z0-9_]+/",
 }
 
 CORS_ALLOW_ALL_ORIGINS = True

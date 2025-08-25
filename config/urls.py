@@ -22,6 +22,8 @@ if settings.DEBUG:
 # API URLS
 urlpatterns += [
     path("api/v1/user/", include("apps.users.urls")),
+    path("api/v1/service/", include("apps.service.urls")),
+    path("api/v1/order/", include("apps.order.urls")),
     path("schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path("docs/", SpectacularSwaggerView.as_view(url_name="api-schema")),
     path("api/v1/token/", TokenObtainPairView.as_view()),
