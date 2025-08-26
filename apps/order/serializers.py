@@ -1,5 +1,3 @@
-from asgiref.sync import async_to_sync
-from channels.layers import get_channel_layer
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
@@ -12,7 +10,6 @@ from apps.utils.notifier import notify
 User = get_user_model()
 
 
-
 class OrderSerializer(serializers.ModelSerializer):
     service = serializers.PrimaryKeyRelatedField(queryset=Service.objects.all())
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -21,7 +18,6 @@ class OrderSerializer(serializers.ModelSerializer):
     service_details = ServiceSerializer(source="service", read_only=True)
     user_details = UserSerializer(source="user", read_only=True)
     worker_datils = UserSerializer(source="worker", read_only=True)
-
 
     class Meta:
         model = Order
@@ -45,7 +41,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
         extra_kwargs = {
             "status": {"read_only": True},
-            "payment_status": {"read_only": True}
+            "payment_status": {"read_only": True},
         }
 
     def create(self, validated_data):
@@ -58,7 +54,6 @@ class OrderSerializer(serializers.ModelSerializer):
             "service": order.service.name,
         }
 
-
         notify(worker.id, data)
         return order
 
@@ -66,21 +61,20 @@ class OrderSerializer(serializers.ModelSerializer):
 class OrderStatusUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['status']
+        fields = ["status"]
 
     def update(self, instance, validated_data):
-        if validated_data['status'] == Order.Status.DONE:
+        if validated_data["status"] == Order.Status.DONE:
             instance.payment_status = Order.PaymentStatus.DONE
 
-        if validated_data['status'] != instance.status:
+        if validated_data["status"] != instance.status:
             data = {
                 "order_id": instance.id,
                 "old_status": instance.status,
-                "new_status": validated_data['status'],
+                "new_status": validated_data["status"],
             }
 
             notify(instance.user.id, data)
-
 
         return super().update(instance, validated_data)
 
@@ -88,13 +82,12 @@ class OrderStatusUpdateSerializer(serializers.ModelSerializer):
 class OrderPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ['id']
+        fields = ["id"]
 
     def update(self, instance, validated_data):
         instance.payment_status = Order.PaymentStatus.DONE
         instance.save()
         return instance
-
 
 
 class WorkerAssignmentToOrderSerializer(serializers.Serializer):

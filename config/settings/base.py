@@ -156,8 +156,8 @@ ADMIN_URL = "admin/"
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
-    }
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
 }
 
 LOGGING = {

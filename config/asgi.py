@@ -21,7 +21,6 @@ from django.core.asgi import get_asgi_application
 from config import routing
 
 
-
 # This allows easy placement of apps within the interior
 # apps directory.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -42,9 +41,9 @@ django_application = get_asgi_application()
 # from config.websocket import websocket_application
 
 
-application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
-    "websocket": AuthMiddlewareStack(
-        URLRouter(routing.websocket_urlpatterns)
-    ),
-})
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+        "websocket": AuthMiddlewareStack(URLRouter(routing.websocket_urlpatterns)),
+    }
+)

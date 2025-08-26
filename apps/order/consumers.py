@@ -7,8 +7,9 @@ class BaseJWTJsonConsumer(AsyncJsonWebsocketConsumer):
     user = None
 
     async def connect(self):
-        from apps.order.models import User
         from rest_framework_simplejwt.tokens import AccessToken
+
+        from apps.order.models import User
 
         query_params = parse_qs(self.scope["query_string"].decode())
         token = query_params.get("token", [None])[0]
@@ -30,7 +31,6 @@ class ClientConsumer(BaseJWTJsonConsumer):
     async def connect(self):
         await super().connect()
         await self.channel_layer.group_add(f"worker_{self.user.id}", self.channel_name)
-
 
     async def disconnect(self, close_code):
         if not self.user.is_anonymous:
