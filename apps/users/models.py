@@ -1,23 +1,14 @@
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.urls import reverse
 
 
 class User(AbstractUser):
-    """
-    Default custom user model for Tourism Automation.
-    If adding fields that need to be filled at user signup,
-    check forms.SignupForm and forms.SocialSignupForms accordingly.
-    """
+    class Role(models.IntegerChoices):
+        ADMIN = 1, 'Admin'
+        WORKER = 2, "Worker"
+        CLIENT = 3, 'Client'
 
-    # First and last name do not cover name patterns around the globe
-    # first_name = None  # type: ignore[assignment]
-    # last_name = None  # type: ignore[assignment]
+    role = models.PositiveSmallIntegerField(choices=Role)
 
-    def get_absolute_url(self) -> str:
-        """Get URL for user's detail view.
 
-        Returns:
-            str: URL for user detail.
-
-        """
-        return reverse("users:detail", kwargs={"username": self.username})

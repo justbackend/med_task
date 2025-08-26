@@ -30,4 +30,4 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         validated_data.pop("sms_code")
-        return User.objects.create_user(**validated_data)
+        return User.objects.create_user(**validated_data, role=User.Role.CLIENT)
